@@ -4,14 +4,14 @@ sum = 0;
 
 #for i in range(1,(int(sys.argv[1]))) :
 def fibSequence(previous,current,limit):
-		fib_sum = previous + current
-		print(fib_sum)
-		if (fib_sum <= limit):
-				print(fib_sum, end=", ")
-				fibSequence(current, fib_sum, limit)
-		else:
-				print("fib_sum", fib_sum)
+		if (current > limit):
 				return
+		next_digit = previous + current
+		if (next_digit % 2 == 0): 
+			if (next_digit <= limit):
+				sum+=fibSequence(current, next_digit, limit)
+			else:
+				return (sum)
 
 
 fibSequence(1,1,int(sys.argv[1]))
