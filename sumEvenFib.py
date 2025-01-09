@@ -1,20 +1,24 @@
 import sys
 
-sum = 0;
+sum = 0
 
 #for i in range(1,(int(sys.argv[1]))) :
-def fibSequence(previous,current,limit):
-		if (current > limit):
-				return
-		next_digit = previous + current
-		if (next_digit % 2 == 0): 
-			if (next_digit <= limit):
-				sum+=fibSequence(current, next_digit, limit)
-			else:
-				return (sum)
+def fibSequence(limit):
+		evens_sum = 0
+		i = 1
+		last = 0
+		current = 0
+		while (i <= limit):
+				if (i % 2 == 0):
+						print(i)
+						evens_sum += i
+				current = i
+				i += last
+				last = current
+		print("sum: ",evens_sum)
+		return 0
 
-
-fibSequence(1,1,int(sys.argv[1]))
+fibSequence(int(sys.argv[1]))
 #for i in range(int(sys.argv[1])) :
 #	if (i > 0 and i % 2 == 0) :
 #				sum+=i
