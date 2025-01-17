@@ -1,0 +1,3 @@
+The prime factors 6 of are 1,2,3 and 6.
+
+What is the largest prime factor of the number 600851475143?
