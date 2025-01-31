@@ -20,24 +20,37 @@ def getFactors(num):
 		return(f)
 
 #largest prime factor
-lpf = 0
+def findLargestPrime(factor_list):
+		for i in range(len(factor_list)-1,-1,-1):
+				if isPrime(factor_list[i]):
+						print(factor_list[i])
+						return
+		print("No prime factors for ")
+		print(factor_list)
+		return
 
-#create a list of factors for n
+def isPrime(num):
+		#cut down on time, check if it's divisible by 2 or 5 right away.
+		if (num != 2 and num!=5 and num!=3 and num!=7):
+				if (num%2 == 0 or num%5 == 0 or num%3 == 0 or num%7 == 0):
+						return False
+		#create a list of factors for n
+		factors = getFactors(num)
+		#evaluate the list for primeness ( only 2 factors )
+		if (len(factors) == 2):
+				#primeStatus = ' is prime!'
+				primeBool = True
+		else:
+				#primeStatus = ' is NOT prime =('
+				primeBool = False
+	    
+		#print(factors)
+		#print(factors[len(factors)-1], primeStatus)
+		return primeBool
+
 n = int(sys.argv[1])
-factors = list()
-factors = getFactors(n)
+isPrime(n)
+findLargestPrime(getFactors(n))
 
-print(factors)
-if (len(factors) == 2):
-		print(n,' is prime!')
-else:
-		print(n,' is NOT prime =(')
-
-#evaluate the list for prime-ness
 #return largest prime factor
-
-#for i in range(int(sys.argv[1])) :
-#		if (i % 5 == 0 or i % 3 == 0) :
-#				sum+=i
-#print(sum)
 quit()
