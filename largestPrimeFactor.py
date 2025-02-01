@@ -4,53 +4,62 @@ import sys
 import math
 
 #create a list of factors for n
-def getFactors(num):
-		f = [1]
+def getLargestPrimeFactor(num):
 		int_sqrt = round(math.sqrt(num))
-		for i in range(2,int_sqrt):
+		primeFactors = list()
+		for i in range(int_sqrt,0,-1):
 				if (num%i == 0):
-						f.append(i)
+						highFactor = int(num/i)
+						if (isPrime(highFactor)):
+								return highFactor
+						if (isPrime(i)):
+								primeFactors.append(i)
+		#if we found primes on the lower half return largest
+		return primeFactors[0]
 
-		if (num%int_sqrt == 0):
-				f.append(int_sqrt)
-
-		for item in reversed(f):
-				f.append(int(num/item))
-
-		return(f)
+#create a list of factors for n
+#def getFactors(num):
+#		f = [1, num]
+#		int_sqrt = round(math.sqrt(num))
+#		for i in range(int_sqrt,1,-1):
+#				if (num%i == 0):
+#						f.append(i)
+#						f.append(int(num/i))
+#
+#		return sorted(f)
 
 #largest prime factor
-def findLargestPrime(factor_list):
-		for i in range(len(factor_list)-1,-1,-1):
-				if isPrime(factor_list[i]):
-						print(factor_list[i])
-						return
-		print("No prime factors for ")
-		print(factor_list)
-		return
+#def findLargestPrime(factor_list):
+#		for i in range(len(factor_list)-1,-1,-1):
+#				if isPrime(factor_list[i]):
+#						print(factor_list[i])
+#						return
+#		print("No prime factors for ")
+#		print(factor_list)
+#		return
 
 def isPrime(num):
-		#cut down on time, check if it's divisible by 2 or 5 right away.
-		if (num != 2 and num!=5 and num!=3 and num!=7):
-				if (num%2 == 0 or num%5 == 0 or num%3 == 0 or num%7 == 0):
-						return False
-		#create a list of factors for n
-		factors = getFactors(num)
-		#evaluate the list for primeness ( only 2 factors )
-		if (len(factors) == 2):
-				#primeStatus = ' is prime!'
-				primeBool = True
-		else:
-				#primeStatus = ' is NOT prime =('
-				primeBool = False
+		primeBool = False
+		#rule out the quick ones
+		if (num%2 == 0 or num%5 == 0 or num%3 == 0 or num%7 == 0):
+				return primeBool
+
+		#case where number has a regular integer as its sqrt
+		theSqrt = math.sqrt(num)
+		#if (num%round(math.sqrt(num)) == 0):
+		if (theSqrt == round(theSqrt)):
+				return primeBool
+		
+		for i in range(round(theSqrt)-1,2,-1):
+				if (num%i == 0):
+					return primeBool
 	    
-		#print(factors)
-		#print(factors[len(factors)-1], primeStatus)
+		primeBool = True
 		return primeBool
 
 n = int(sys.argv[1])
-isPrime(n)
-findLargestPrime(getFactors(n))
-
 #return largest prime factor
+print(getLargestPrimeFactor(n))
+
+
 quit()
